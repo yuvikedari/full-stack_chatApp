@@ -1,14 +1,18 @@
 pipeline {
-    agent any
+    agent {label "workernode"}
 
     stages {
+        stage('Clean Up') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'master',
                     url: 'https://github.com/iemafzalhassan/full-stack_chatApp.git'
             }
         }
-
         stage('Test') {
             steps {
                 script {
