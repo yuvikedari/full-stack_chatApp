@@ -1,45 +1,35 @@
 pipeline {
-    agent {label "workernode"}
+  agent any
 
-    stages {
-        stage('Clean Up') {
-            steps {
-                cleanWs()
-            }
-        }
-        stage('Checkout') {
-            steps {
-                git branch: 'master',
-                    url: 'https://github.com/iemafzalhassan/full-stack_chatApp.git'
-            }
-        }
-        stage('Test') {
-            steps {
-                script {
-                    sh '''
-                        sleep 15
-                        curl -f http://localhost:5001/health
-                        curl -f http://localhost/ || exit 1
-                    '''
-                }
-            }
-        }
+  environment {
+    SONAR_HOME = tool "sonarqube"
+  }
 
-        stage('Deploy') {
-            steps {
-                script {
-                    sh 'docker-compose up -d --build'
-                }
-            }
-        }
+  stages {
+    stage('Clean UP') {
+      steps {
+        cleanWs()
+      }
     }
-
-    post {
-        success {
-            echo 'Deployment and tests completed successfully!'
-        }
-        failure {
-            echo 'Deployment or tests failed.'
-        }
+    stage('Code Check out') {
+      steps {
+        git branch: 'master',
+          url: 'https://github.com/iemafzalhassan/full-stack_chatApp.git'
+      }
     }
+    stage('Code Quality') {
+      steps {
+        withSonarQubeEnv("sonarqube") {
+          sh "$SONAR_HOME/bin/sonar-scanner -Dsonar.projectName=chat-app -Dsonar.projectKey=chat-app -X"
+        }
+      }
+    }
+    stage('Deploy') {
+      steps {
+        script {
+          sh 'docker compose up -d --build'
+        }
+      }
+    }
+  }
 }
