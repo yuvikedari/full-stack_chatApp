@@ -55,7 +55,7 @@ services:
       - full-stack
 
 networks:
-  chatapp-network:
+  full-stack:
     driver: bridge
 
 volumes:
