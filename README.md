@@ -64,7 +64,7 @@ cd backend
 ```
 2. Create a `.env` file and add the following content (modify the values as needed):
 ```env
-MONGODB_URI=mongodb://mongo:27017/chatapp
+MONGODB_URI=mongodb://mongoadmin:secret@mongodb:27017/dbname?authSource=admin
 JWT_SECRET=your_jwt_secret_key
 PORT=5001
 ```
@@ -154,6 +154,7 @@ docker build -t full-stack_backend .
 
 ```bash
 docker run -d --network=full-stack --add-host=host.docker.internal:host-gateway -p 5001:5001 --env-file .env full-stack_backend
+
 ```
 #### This will build and run the backend container, exposing the backendAPI on port 5001.
 
