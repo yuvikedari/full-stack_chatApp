@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
+  namespace: chat-app
 spec:
   replicas: 1
   selector:
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: full-stack_backend:1.0
+        image: iemafzal/f-s_backend:v1  
         ports:
         - containerPort: 5001
         env:
