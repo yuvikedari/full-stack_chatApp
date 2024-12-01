@@ -111,6 +111,14 @@ This will:
 
 Now that we have everything in place, let’s start deploying the chat application to Kubernetes. Below are the detailed steps to deploy each component of the application using **Kind**.
 
+### 📦 Create a Kind Cluster
+
+To create a **Kind** cluster, run:
+
+```bash
+kind create cluster --name chat-app
+```
+
 ### 1. 🗂️ Create a Kubernetes Namespace
 
 A **namespace** is a way to organize your resources. It keeps the app's resources isolated and easy to manage. To create the namespace for our chat app, run:
@@ -126,9 +134,9 @@ This command will create the `chat-app` namespace where all the app components w
 MongoDB is used for storing chat messages and user data. To deploy MongoDB, apply the following commands:
 
 ```bash
-kubectl apply -f mongo-pvc.yaml -n chat-app
 kubectl apply -f mongodb-deployment.yaml -n chat-app
 kubectl apply -f mongodb-service.yaml -n chat-app
+kubectl apply -f mongo-pvc.yaml -n chat-app
 ```
 
 - **mongo-pvc.yaml**: Defines persistent storage for MongoDB.
@@ -206,7 +214,7 @@ kubectl logs <pod-name> -n chat-app
 To access the frontend from your local browser, run:
 
 ```bash
-kubectl port-forward service/frontend-service 8080:80 -n chat-app
+kubectl port-forward service/frontend 8080:80 -n chat-app
 ```
 
 You can now access the app by visiting [http://localhost:8080](http://localhost:8080) in your browser.
