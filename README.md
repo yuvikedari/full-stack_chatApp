@@ -198,9 +198,9 @@ We invite you to join our community of developers and contributors. Let's work t
 
 This project is evolving, and here are a few exciting things on the horizon:
 
-* [ ] **CI/CD Pipelines:** Implement Continuous Integration and Continuous Deployment pipelines to automate testing and deployment.
-* [ ] **Kubernetes (K8s):** Add Kubernetes manifests for container orchestration to deploy the app on cloud platforms like AWS, GCP, or Azure.
-* [ ] **Feature Expansion:** Add more features like group chats, media sharing, and user status updates.
+* [x] **CI/CD Pipelines:** Implement Continuous Integration and Continuous Deployment pipelines to automate testing and deployment.
+* [x] **Kubernetes (K8s):** Add Kubernetes manifests for container orchestration to deploy the app on cloud platforms like AWS, GCP, or Azure.
+* [x] **Feature Expansion:** Add more features like group chats, media sharing, and user status updates.
 * **Stay tuned for updates as we continue to improve and expand this project!**
 
 ---
